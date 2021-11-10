@@ -12,5 +12,9 @@ public interface RestauranteDAO {
 	public void atualizar(Restaurante restaurante) throws DBException;
 	public Restaurante buscar(int id);
 	public void remover(int id) throws DBException;
+	public List<Restaurante> listarTaxa();
+	public List<Restaurante> listarTempo();
+	public List<Restaurante> listarPedido();
+
 	
 }

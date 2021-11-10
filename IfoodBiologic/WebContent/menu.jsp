@@ -7,14 +7,14 @@
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div class="collapse navbar-collapse " id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="restaurante?acao=abrir-form-cadastro">Cadastro</a>
-					</li>
-					
-					
+				<li class="nav-item"><a class="nav-link active "aria-current="page" href="restaurante?acao=abrir-form-cadastro">Cadastro</a></li>					
 				<li class="nav-item"><a class="nav-link" href="restaurante?acao=listar">Restaurantes Cadastrados</a></li>
+				<li class="nav-item"><a class="nav-link" href="restaurante?acao=listarTaxa">Menor Frete</a></li>
+				<li class="nav-item"><a class="nav-link" href="restaurante?acao=listarTempo">Tempo de Entrega</a></li>
+						<li class="nav-item"><a class="nav-link" href="restaurante?acao=listarPedidoMinimo">Pedido Mínimo</a></li>
+				
 			</ul>
 			<form class="d-flex">
 				<input class="form-control me-2" type="search" placeholder="Search"

@@ -59,16 +59,24 @@ public class RestauranteServlet extends HttpServlet {
 			return;
 		}
 		switch (acao) {
-
-		case "listar":
-			listar(request, response);
-			break;
-		case "abrir-form-edicao":
-			abrirFormEdicao(request, response);
-			break;
-		case "abrir-form-cadastro":
-			abrirFormCadastro(request,response);
-			break;
+			case "listar":
+				listar(request, response);
+				break;
+			case "abrir-form-edicao":
+				abrirFormEdicao(request, response);
+				break;
+			case "abrir-form-cadastro":
+				abrirFormCadastro(request,response);
+				break;
+			case "listarTaxa":
+				listarTaxa(request, response);
+				break;
+			case "listarTempo":
+				listarTempo(request, response);
+				break;
+			case "listarPedidoMinimo":
+				listarPedido(request, response);
+				break;
 		}
 	}
 
@@ -97,6 +105,24 @@ public class RestauranteServlet extends HttpServlet {
 		List<Restaurante> lista = dao.listar();
 		request.setAttribute("restaurantes", lista);
 		request.getRequestDispatcher("restaurante-listar.jsp").forward(request, response);
+	}
+	
+	private void listarTaxa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Restaurante> listaTaxa = dao.listarTaxa();
+		request.setAttribute("restaurantes", listaTaxa);
+		request.getRequestDispatcher("restaurante-taxa.jsp").forward(request, response);
+	}
+	
+	private void listarTempo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Restaurante> listaTempo = dao.listarTempo();
+		request.setAttribute("restaurantes", listaTempo);
+		request.getRequestDispatcher("restaurante-tempo.jsp").forward(request, response);
+	}
+	
+	private void listarPedido(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Restaurante> listarPedido = dao.listarPedido();
+		request.setAttribute("restaurantes", listarPedido);
+		request.getRequestDispatcher("restaurante-saturacao.jsp").forward(request, response);
 	}
 
 
@@ -175,7 +201,7 @@ public class RestauranteServlet extends HttpServlet {
 
 		try {
 			dao.remover(codigo);
-			request.setAttribute("msg", "Produto removido");
+			request.setAttribute("msg", "Restaurante removido");
 
 		} catch (DBException e) {
 			e.printStackTrace();

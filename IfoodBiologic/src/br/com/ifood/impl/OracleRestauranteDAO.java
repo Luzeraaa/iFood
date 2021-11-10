@@ -101,6 +101,150 @@ public class OracleRestauranteDAO implements RestauranteDAO {
 		return lista;
 
 	}
+	
+	@Override
+	public List<Restaurante> listarTaxa() {
+		List<Restaurante> lista = new ArrayList<Restaurante>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conexao = ConnectionManager.getInstance().getConnection();
+			stmt = conexao.prepareStatement("SELECT * FROM T_RESTAURANTE INNER JOIN T_TIPO_COMIDA ON T_RESTAURANTE.T_TIPO_COMIDA_ID_TIPO_COMIDA = T_TIPO_COMIDA.ID_TIPO_COMIDA ORDER BY VLR_FRETE");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int codigo = rs.getInt("ID_RESTAURANTE");
+				String nome = rs.getString("NOME_RESTAURANTE");
+				float frete = rs.getFloat("VLR_FRETE");
+				int entrega = rs.getInt("TP_ENTREGA");	
+				float pedidoMin = rs.getFloat("VLR_PEDIDO_MIN");
+				String responsavel = rs.getString("NOME_RESP");
+				String email = rs.getString("EMAIL_RESP");
+				String cnpj = rs.getString("NR_CNPJ");
+				String regiao = rs.getString("DS_REGIAO");
+				
+				int codigoComida = rs.getInt("ID_TIPO_COMIDA");
+				String nomeComida = rs.getString("DS_TIPO_COMIDA");
+
+				Comida comida = new Comida(codigoComida, nomeComida);
+				Restaurante restaurante = new Restaurante(codigo, nome, frete, entrega, pedidoMin, responsavel, email, cnpj, regiao);
+				restaurante.setComida(comida);
+				lista.add(restaurante);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conexao.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return lista;
+
+	}
+	
+	
+	@Override
+	public List<Restaurante> listarTempo() {
+		List<Restaurante> lista = new ArrayList<Restaurante>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conexao = ConnectionManager.getInstance().getConnection();
+			stmt = conexao.prepareStatement("SELECT * FROM T_RESTAURANTE INNER JOIN T_TIPO_COMIDA ON T_RESTAURANTE.T_TIPO_COMIDA_ID_TIPO_COMIDA = T_TIPO_COMIDA.ID_TIPO_COMIDA ORDER BY TP_ENTREGA");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int codigo = rs.getInt("ID_RESTAURANTE");
+				String nome = rs.getString("NOME_RESTAURANTE");
+				float frete = rs.getFloat("VLR_FRETE");
+				int entrega = rs.getInt("TP_ENTREGA");	
+				float pedidoMin = rs.getFloat("VLR_PEDIDO_MIN");
+				String responsavel = rs.getString("NOME_RESP");
+				String email = rs.getString("EMAIL_RESP");
+				String cnpj = rs.getString("NR_CNPJ");
+				String regiao = rs.getString("DS_REGIAO");
+				
+				int codigoComida = rs.getInt("ID_TIPO_COMIDA");
+				String nomeComida = rs.getString("DS_TIPO_COMIDA");
+
+				Comida comida = new Comida(codigoComida, nomeComida);
+				Restaurante restaurante = new Restaurante(codigo, nome, frete, entrega, pedidoMin, responsavel, email, cnpj, regiao);
+				restaurante.setComida(comida);
+				lista.add(restaurante);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conexao.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return lista;
+
+	}
+	
+	@Override
+	public List<Restaurante> listarPedido() {
+		List<Restaurante> lista = new ArrayList<Restaurante>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			conexao = ConnectionManager.getInstance().getConnection();
+			stmt = conexao.prepareStatement("SELECT * FROM T_RESTAURANTE INNER JOIN T_TIPO_COMIDA ON T_RESTAURANTE.T_TIPO_COMIDA_ID_TIPO_COMIDA = T_TIPO_COMIDA.ID_TIPO_COMIDA ORDER BY VLR_PEDIDO_MIN ASC");
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int codigo = rs.getInt("ID_RESTAURANTE");
+				String nome = rs.getString("NOME_RESTAURANTE");
+				float frete = rs.getFloat("VLR_FRETE");
+				int entrega = rs.getInt("TP_ENTREGA");	
+				float pedidoMin = rs.getFloat("VLR_PEDIDO_MIN");
+				String responsavel = rs.getString("NOME_RESP");
+				String email = rs.getString("EMAIL_RESP");
+				String cnpj = rs.getString("NR_CNPJ");
+				String regiao = rs.getString("DS_REGIAO");
+				
+				int codigoComida = rs.getInt("ID_TIPO_COMIDA");
+				String nomeComida = rs.getString("DS_TIPO_COMIDA");
+
+				Comida comida = new Comida(codigoComida, nomeComida);
+				Restaurante restaurante = new Restaurante(codigo, nome, frete, entrega, pedidoMin, responsavel, email, cnpj, regiao);
+				restaurante.setComida(comida);
+				lista.add(restaurante);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				conexao.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return lista;
+
+	}
+	
+	
+	
+	
+	
 
 	@Override
 	public Restaurante buscar(int id) {

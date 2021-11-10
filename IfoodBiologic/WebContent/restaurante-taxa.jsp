@@ -16,10 +16,11 @@
 
 </head>
 <body>
-
 	<%@ include file="menu.jsp"%>
+	
+	
 	<div class="container text-center">
-		<h1 class="mb-5 mt-3">Restaurantes Cadastrados</h1>
+		<h1 class="mb-5 mt-3">Restaurantes com menor Frete</h1>
 		
 
 		<c:if test="${not empty msg }">
@@ -34,7 +35,7 @@
 		
 	
 		<section  class="row d-flex justify-content-around"> 
-		<c:forEach items="${restaurantes }" var="c">
+		<c:forEach items="${restaurantes}" var="c">
 		<article class="mb-5 col-12 col-md-4">
 		<div class="card ">
 			<div class="card-body ">
@@ -42,9 +43,8 @@
 			</div>
 			<list class="d-flex justify-content-center">
 			<ul class="list-group list-group-flush text-center col-md-11">
-				<li class="list-group-item"><span class="fs-5">Tipo de
-						comida</span><br>${c.comida.descricaoComida }</li>
-				<li class="list-group-item"><span class="fs-5">Frete
+				
+				<li class="list-group-item text-danger"><span class="fs-5">Frete
 						mínimo</span><br>${c.valorFrete }</li>
 				<li class="list-group-item"><span class="fs-5">Tempo de
 						Entrega</span><br>${c.tempoEntrega }</li>
@@ -75,45 +75,7 @@
 </div>
 
 
-
-
-
-
-
-
-
-
 	<%@ include file="bootstrap/js.jsp"%>
-
-
-	<!-- Modal -->
-	<div class="modal fade" id="excluirCodigo" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Exclusão</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<h1>Deseja realmente excluir o produto?</h1>
-
-				</div>
-				<div class="modal-footer">
-					<form action="produto" method="post">
-
-						<input type="hidden" name="acao" value="excluir"> <input
-							type="hidden" name="codigo" id="codigoExcluir">
-
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger">Excluir</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
 
 </body>
 </html>

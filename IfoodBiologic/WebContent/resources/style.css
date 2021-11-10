@@ -1,0 +1,59 @@
+@charset "ISO-8859-1";
+
+
+.fonte-especial{
+    font-family: 'Roboto', sans-serif;
+}
+
+.img-logo{
+   	width: 50%;
+   	height: auto;
+}
+
+
+
+.texto-especial{
+    font-family: 'Pacifico', cursive;
+    color: #dc3545!important;
+}
+
+.input-login{
+    border-bottom:1px solid #dc3545 ;
+    
+}
+
+.botao-login{
+    background-color: #dc3545;
+    color: white;
+}
+
+.cor-especial{
+    color: #dc3545;
+}
+
+.timer{
+    width: 200px;
+    height: 150px;
+}
+
+.card-dashboard{
+    height: 180px;
+    width: 180px;
+
+}
+
+.card-hist-imagem{
+    height: 50px;
+    width: 50px;
+}
+
+.row{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+footer{
+	position:absolute;
+	bottom: 0%;
+	width:100% 
+}

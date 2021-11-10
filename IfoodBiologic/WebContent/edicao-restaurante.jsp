@@ -115,6 +115,13 @@
 			<a href="restaurante?acao=listar" class="btn btn-danger">Cancelar</a>
 		</form>
 	</div>
+	
+	<br><br>
+
+
+<footer class="bg-dark text-light text-center pb-2 pt-2">
+		<h5>Biologic Inc ©</h5>
+	</footer>
 
 
 	<%@ include file="bootstrap/js.jsp"%>
