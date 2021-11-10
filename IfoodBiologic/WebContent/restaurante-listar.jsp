@@ -37,6 +37,7 @@
 				<th>Email do Responsável</th>
 				<th>CNPJ</th>
 				<th>Região</th>
+				<th>Tipo de Comida</th>
 				<th></th>
 			</tr>
 			<c:forEach items="${restaurantes}" var="r">
@@ -49,6 +50,7 @@
 					<td>${r.emailResponsavel}</td>
 					<td>${r.cnpj}</td>
 					<td>${r.regiao}</td>
+					<td>${r.comida.descricaoComida}</td>
 					
 					<td><c:url value="restaurante" var="link">
 							<c:param name="acao" value="abrir-form-edicao" />

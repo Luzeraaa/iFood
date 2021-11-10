@@ -64,7 +64,7 @@ public class OracleRestauranteDAO implements RestauranteDAO {
 
 		try {
 			conexao = ConnectionManager.getInstance().getConnection();
-			stmt = conexao.prepareStatement("SELECT * FROM T_RESTAURANTE");
+			stmt = conexao.prepareStatement("SELECT * FROM T_RESTAURANTE INNER JOIN T_TIPO_COMIDA ON T_RESTAURANTE.T_TIPO_COMIDA_ID_TIPO_COMIDA = T_TIPO_COMIDA.ID_TIPO_COMIDA");
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -77,8 +77,13 @@ public class OracleRestauranteDAO implements RestauranteDAO {
 				String email = rs.getString("EMAIL_RESP");
 				String cnpj = rs.getString("NR_CNPJ");
 				String regiao = rs.getString("DS_REGIAO");
+				
+				int codigoComida = rs.getInt("ID_TIPO_COMIDA");
+				String nomeComida = rs.getString("DS_TIPO_COMIDA");
 
+				Comida comida = new Comida(codigoComida, nomeComida);
 				Restaurante restaurante = new Restaurante(codigo, nome, frete, entrega, pedidoMin, responsavel, email, cnpj, regiao);
+				restaurante.setComida(comida);
 				lista.add(restaurante);
 			}
 
