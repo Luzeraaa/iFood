@@ -84,10 +84,10 @@
 					<option value="0">Selecione</option>
 					<c:forEach items="${comidas}" var="c">
 						<c:if test="${c.idComida == restaurante.comida.idComida}">
-							<option value="${c.idComida}" selected="${c.nome} }">${c.nome}</option>
+							<option value="${c.idComida}" selected="${c.descricaoComida}">${c.descricaoComida}</option>
 						</c:if>
 						<c:if test="${c.idComida != restaurante.comida.idcomida}">
-							<option value="${c.idComida}">${c.nome}</option>
+							<option value="${c.idComida}">${c.descricaoComida}</option>
 						</c:if>
 					</c:forEach>
 				</select>
