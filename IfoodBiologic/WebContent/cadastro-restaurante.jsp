@@ -18,7 +18,7 @@
 	<%@ include file="menu.jsp"%>
 
 	<div class ="container">
-	<h1>Cadastro de Produtos</h1>
+	<h1>Cadastro de Restaurantes</h1>
 
 
 	<c:if test="${not empty msg}">
@@ -83,11 +83,16 @@
 				<select name="comida" id="id-categoria" class="form-control">
 					<option value="0">Selecione</option>
 					<c:forEach items="${comidas}" var="c">
-						<option value = "${c.idComida }"> ${c.descricaoComida}</option>
+						<c:if test="${c.idComida == restaurante.comida.idComida}">
+							<option value="${c.idComida}" selected="${c.nome} }">${c.nome}</option>
+						</c:if>
+						<c:if test="${c.idComida != restaurante.comida.idcomida}">
+							<option value="${c.idComida}">${c.nome}</option>
+						</c:if>
 					</c:forEach>
 				</select>
 			</div>
-		
+
 			
 		
 			<br>

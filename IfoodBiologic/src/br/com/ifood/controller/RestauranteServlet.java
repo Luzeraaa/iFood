@@ -16,43 +16,39 @@ import br.com.ifood.dao.RestauranteDAO;
 import br.com.ifood.factory.DAOFactory;
 import br.com.ifood.exception.DBException;
 
-
-
-
-
 @WebServlet("/restaurante")
 public class RestauranteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
+
 	private RestauranteDAO dao;
 	private ComidaDAO comidaDAO;
-	
+
 	public void init() throws ServletException {
 		super.init();
 		dao = DAOFactory.getRestauranteDAO();
 		comidaDAO = DAOFactory.getComidaDAO();
 	}
-	
-	
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-			String acao = request.getParameter("acao");
-			switch (acao) {
-			case "cadastrar":
-				cadastrar(request, response);
-				break;
-			case "editar":
-				editar(request, response);
-				break;
-				
-			case "excluir":
-				excluir(request, response);
-				break;
-			}
-		
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String acao = request.getParameter("acao");
+		switch (acao) {
+		case "cadastrar":
+			cadastrar(request, response);
+			break;
+		case "editar":
+			editar(request, response);
+			break;
+
+		case "excluir":
+			excluir(request, response);
+			break;
+		}
+
 	}
-		
-		
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -71,8 +67,8 @@ public class RestauranteServlet extends HttpServlet {
 		}
 	}
 
-	
-	
+
+
 	private void abrirFormCadastro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		carregarOpcoesComida(request);
@@ -89,16 +85,17 @@ public class RestauranteServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("codigo"));
 		Restaurante restaurante = dao.buscar(id);
 		request.setAttribute("restaurante", restaurante);
+		carregarOpcoesComida(request);
 		request.getRequestDispatcher("edicao-restaurante.jsp").forward(request, response);
 	}
-	
+
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Restaurante> lista = dao.listar();
 		request.setAttribute("restaurantes", lista);
 		request.getRequestDispatcher("restaurante-listar.jsp").forward(request, response);
 	}
-	
-	
+
+
 	private void cadastrar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
@@ -112,17 +109,17 @@ public class RestauranteServlet extends HttpServlet {
 			String cnpj = request.getParameter("cnpj");
 			String regiao = request.getParameter("regiao");
 			int codigoComida = Integer.parseInt(request.getParameter("comida"));
-			
+
 			Comida comida = new Comida();
 			comida.setIdComida(codigoComida);
-			
-			
+
+
 			Restaurante restaurante = new Restaurante(0, nome, frete, entrega, pedidoMinimo, responsavel, email, cnpj, regiao);
 			restaurante.setComida(comida);
 			dao.cadastrar(restaurante);
-			
+
 			request.setAttribute("msg", "Produto Cadastrado com sucesso!");
-			
+
 		} catch (DBException e) {
 			e.printStackTrace();
 			request.setAttribute("erro", "Erro ao se conectar!");
@@ -134,8 +131,8 @@ public class RestauranteServlet extends HttpServlet {
 		abrirFormCadastro(request, response);
 	}
 
-	
-	
+
+
 	private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 
@@ -149,7 +146,7 @@ public class RestauranteServlet extends HttpServlet {
 			String cnpj = request.getParameter("cnpj");
 			String regiao = request.getParameter("regiao");
 			int codigoComida = Integer.parseInt(request.getParameter("comida"));
-			
+
 			Comida comida = new Comida();
 			comida.setIdComida(codigoComida);
 
@@ -167,7 +164,7 @@ public class RestauranteServlet extends HttpServlet {
 		}
 		listar(request, response);
 	}
-	
+
 	private void excluir(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int codigo = Integer.parseInt(request.getParameter("codigo"));
@@ -183,6 +180,6 @@ public class RestauranteServlet extends HttpServlet {
 		listar(request, response);
 
 	}
-	
+
 
 }
