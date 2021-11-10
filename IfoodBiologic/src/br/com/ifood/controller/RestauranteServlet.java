@@ -54,6 +54,10 @@ public class RestauranteServlet extends HttpServlet {
 
 		String acao = request.getParameter("acao");
 
+		if (acao == null) {
+			request.getRequestDispatcher("home.jsp").forward(request, response);
+			return;
+		}
 		switch (acao) {
 
 		case "listar":
@@ -64,9 +68,9 @@ public class RestauranteServlet extends HttpServlet {
 			break;
 		case "abrir-form-cadastro":
 			abrirFormCadastro(request,response);
+			break;
 		}
 	}
-
 
 
 	private void abrirFormCadastro(HttpServletRequest request, HttpServletResponse response)
