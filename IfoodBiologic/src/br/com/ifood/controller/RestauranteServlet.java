@@ -41,6 +41,13 @@ public class RestauranteServlet extends HttpServlet {
 			case "cadastrar":
 				cadastrar(request, response);
 				break;
+			case "editar":
+				editar(request, response);
+				break;
+				
+			case "excluir":
+				excluir(request, response);
+				break;
 			}
 		
 	}
@@ -56,7 +63,6 @@ public class RestauranteServlet extends HttpServlet {
 		case "listar":
 			listar(request, response);
 			break;
-
 		case "abrir-form-edicao":
 			abrirFormEdicao(request, response);
 			break;
@@ -83,7 +89,7 @@ public class RestauranteServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("codigo"));
 		Restaurante restaurante = dao.buscar(id);
 		request.setAttribute("restaurante", restaurante);
-		request.getRequestDispatcher("edicao-produto.jsp").forward(request, response);
+		request.getRequestDispatcher("edicao-restaurante.jsp").forward(request, response);
 	}
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -128,5 +134,55 @@ public class RestauranteServlet extends HttpServlet {
 		abrirFormCadastro(request, response);
 	}
 
+	
+	
+	private void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+
+			int codigo = Integer.parseInt(request.getParameter("codigo"));
+			String nome = request.getParameter("restaurante");
+			float frete = Float.parseFloat(request.getParameter("frete"));
+			int entrega = Integer.parseInt(request.getParameter("tempoEntrega"));
+			float pedidoMinimo = Float.parseFloat(request.getParameter("pedidoMinimo"));
+			String responsavel = request.getParameter("responsavel");
+			String email = request.getParameter("emailResponsavel");
+			String cnpj = request.getParameter("cnpj");
+			String regiao = request.getParameter("regiao");
+			int codigoComida = Integer.parseInt(request.getParameter("comida"));
+			
+			Comida comida = new Comida();
+			comida.setIdComida(codigoComida);
+
+			Restaurante restaurante = new Restaurante(codigo, nome, frete, entrega, pedidoMinimo, responsavel, email, cnpj, regiao);
+			restaurante.setComida(comida);
+			dao.atualizar(restaurante);
+
+			request.setAttribute("msg", "Produto atualizado com sucesso!");
+		} catch (DBException e) {
+			e.printStackTrace();
+			request.setAttribute("erro", "Erro ao atualizar!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("erro", "Por favor, valide os dados.");
+		}
+		listar(request, response);
+	}
+	
+	private void excluir(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int codigo = Integer.parseInt(request.getParameter("codigo"));
+
+		try {
+			dao.remover(codigo);
+			request.setAttribute("msg", "Produto removido");
+
+		} catch (DBException e) {
+			e.printStackTrace();
+			request.setAttribute("erro", "Erro ao excluir");
+		}
+		listar(request, response);
+
+	}
+	
 
 }

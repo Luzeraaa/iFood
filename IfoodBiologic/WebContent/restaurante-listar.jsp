@@ -5,6 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastros de Restaurante</title>
 <%@ include file="bootstrap/css.jsp"%>
@@ -49,11 +50,20 @@
 					<td>${r.cnpj}</td>
 					<td>${r.regiao}</td>
 					
+					<td><c:url value="restaurante" var="link">
+							<c:param name="acao" value="abrir-form-edicao" />
+							<c:param name="codigo" value="${r.idRestaurante}" />
+						</c:url> <a href="${link}" class="btn btn-primary">Editar</a></td>
+
 				</tr>
 			</c:forEach>
 		</table>
-	</div>
+</div>
+
+
 	<%@ include file="bootstrap/js.jsp"%>
+
+
 
 	<!-- Modal -->
 	<div class="modal fade" id="excluirModal" tabindex="-1" role="dialog"
@@ -68,19 +78,18 @@
 					</button>
 				</div>
 				<div class="modal-body">
-				<h1>Deseja realmente excluir o produto?</h1>
-				<form action="produto" method="post"> 	
-					 <input type="hidden"name="acao" value="excluir">
-					 <input type="hidden"name="codigo" id="codigoExcluir">
-					 
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Cancelar</button>
-					<button type="submit" class="btn btn-danger">Excluir</button>
+					<h1>Deseja realmente excluir o produto?</h1>
+					<form action="produto" method="post">
+						<input type="hidden" name="acao" value="excluir"> <input
+							type="hidden" name="codigo" id="codigoExcluir">
+
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger">Excluir</button>
 					</form>
-				
+
 				</div>
-				<div class="modal-footer">
-				</div>
+				<div class="modal-footer"></div>
 			</div>
 		</div>
 	</div>
@@ -99,18 +108,18 @@
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-				<h1>Deseja realmente excluir o produto?</h1>
-				
+					<h1>Deseja realmente excluir o produto?</h1>
+
 				</div>
 				<div class="modal-footer">
-					<form action="produto" method="post"> 
-					
-					 <input type="hidden" name="acao" value="excluir">
-					 <input type="hidden" name="codigo" id="codigoExcluir">
-					 
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Cancelar</button>
-					<button type="submit" class="btn btn-danger">Excluir</button>
+					<form action="produto" method="post">
+
+						<input type="hidden" name="acao" value="excluir"> <input
+							type="hidden" name="codigo" id="codigoExcluir">
+
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger">Excluir</button>
 					</form>
 				</div>
 			</div>

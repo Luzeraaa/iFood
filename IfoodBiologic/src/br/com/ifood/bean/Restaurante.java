@@ -24,6 +24,8 @@ public class Restaurante implements Serializable {
 	private String cnpj;
 	
 	private String regiao;
+	
+	private Comida comida;
 
 
 	
@@ -66,12 +68,9 @@ public class Restaurante implements Serializable {
 		return comida;
 	}
 
-
 	public void setComida(Comida comida) {
 		this.comida = comida;
 	}
-
-	private Comida comida;
 
 	public int getIdRestaurante() {
 		return idRestaurante;
